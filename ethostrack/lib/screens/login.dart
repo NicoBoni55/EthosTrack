@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../services/auth_service.dart';
+import '../models/user_model.dart';
 import 'sign_up.dart';
+import 'home_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,26 +21,26 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-          children: [
-            const SizedBox(height: 100),
-            SvgPicture.asset('assets/images/Logo.svg', width: 70, height: 70),
-            const SizedBox(height: 10),
-            Text(
-              'Log in',
-              style: GoogleFonts.montserrat(
-                color: Colors.white,
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
+            children: [
+              const SizedBox(height: 100),
+              SvgPicture.asset('assets/images/Logo.svg', width: 70, height: 70),
+              const SizedBox(height: 10),
+              Text(
+                'Log in',
+                style: GoogleFonts.montserrat(
+                  color: Colors.white,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(children: [LoginInputs()]),
-            ),
-          ],
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(children: [LoginInputs()]),
+              ),
+            ],
+          ),
         ),
-      ),
       ),
     );
   }
@@ -52,8 +55,103 @@ class LoginInputs extends StatefulWidget {
 
 class _LoginInputsState extends State<LoginInputs> {
   bool isPasswordVisible = false;
+  bool isLoading = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  Future<void> _handleLogin() async {
+    if (emailController.text.isEmpty) {
+      _showErrorDialog('Please enter your email');
+      return;
+    }
+    if (passwordController.text.isEmpty) {
+      _showErrorDialog('Please enter your password');
+      return;
+    }
+
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      UserModel? user = await AuthService.logIn(
+        email: emailController.text.trim(),
+        password: passwordController.text,
+      );
+
+      if (user != null) {
+        print('✅ Login exitoso para: ${user.username}');
+        if (mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+          );
+        }
+      } else {
+        _showErrorDialog('Login failed. Please check your credentials.');
+      }
+    } catch (e) {
+      String errorMessage = 'Login failed. Please try again.';
+
+      print('❌ Error en login: $e');
+
+      if (e.toString().contains('user-not-found')) {
+        errorMessage = 'No account found with this email.';
+      } else if (e.toString().contains('wrong-password')) {
+        errorMessage = 'Incorrect password.';
+      } else if (e.toString().contains('invalid-email')) {
+        errorMessage = 'Invalid email format.';
+      } else if (e.toString().contains('user-disabled')) {
+        errorMessage = 'This account has been disabled.';
+      } else if (e.toString().contains('too-many-requests')) {
+        errorMessage = 'Too many failed attempts. Please try again later.';
+      }
+
+      _showErrorDialog(errorMessage);
+    } finally {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.red,
+          title: Text(
+            'Error',
+            style: GoogleFonts.montserrat(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: Text(
+            message,
+            style: GoogleFonts.montserrat(color: Colors.white),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'OK',
+                style: GoogleFonts.montserrat(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +173,10 @@ class _LoginInputsState extends State<LoginInputs> {
             style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
               labelText: "Email",
-              labelStyle: GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.bold),
+              labelStyle: GoogleFonts.montserrat(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
               border: const OutlineInputBorder(
                 borderSide: BorderSide(color: Color(0xFF0CC0DF)),
               ),
@@ -109,7 +210,10 @@ class _LoginInputsState extends State<LoginInputs> {
             style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
               labelText: "Password",
-              labelStyle: GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.bold),
+              labelStyle: GoogleFonts.montserrat(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
               border: const OutlineInputBorder(
                 borderSide: BorderSide(color: Color(0xFF0CC0DF)),
               ),
@@ -142,9 +246,10 @@ class _LoginInputsState extends State<LoginInputs> {
           child: Text(
             'Forgot Password?',
             style: GoogleFonts.montserrat(
-              color: Colors.white, 
+              color: Colors.white,
               fontSize: 15,
-              fontWeight: FontWeight.w500),
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
         const SizedBox(height: 20),
@@ -152,39 +257,39 @@ class _LoginInputsState extends State<LoginInputs> {
           height: 50,
           width: 300,
           child: FloatingActionButton(
-            onPressed: () {},
-            backgroundColor: Colors.white,
-            child: Text(
-              "Login",
-              style: GoogleFonts.montserrat(
-                color: Color(0xFF0CC0DF),
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            onPressed: isLoading ? null : _handleLogin,
+            backgroundColor: isLoading ? Colors.grey : Colors.white,
+            child: isLoading
+                ? const CircularProgressIndicator(
+                    color: Colors.grey,
+                    strokeWidth: 2,
+                  )
+                : Text(
+                    "Login",
+                    style: GoogleFonts.montserrat(
+                      color: Color(0xFF0CC0DF),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
           ),
         ),
         const SizedBox(height: 30),
         Row(
           children: [
             Flexible(
-              child: Divider(
-                thickness: 2,
-                indent: 40,
+              child: Divider(thickness: 2, indent: 40, color: Colors.white),
+            ),
+            Text(
+              "   or   ",
+              style: GoogleFonts.montserrat(
+                fontSize: 18,
                 color: Colors.white,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            Text("   or   ", style: GoogleFonts.montserrat(
-              fontSize: 18,
-              color: Colors.white,
-              fontWeight: FontWeight.bold
-            )),
             Flexible(
-              child: Divider(
-                thickness: 2,
-                endIndent: 40,
-                color: Colors.white,
-              ),
+              child: Divider(thickness: 2, endIndent: 40, color: Colors.white),
             ),
           ],
         ),
@@ -192,31 +297,32 @@ class _LoginInputsState extends State<LoginInputs> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Don\'t have an account?', 
-            style: GoogleFonts.montserrat(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w500
+            Text(
+              'Don\'t have an account?',
+              style: GoogleFonts.montserrat(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
               ),
             ),
             TextButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => RegisterPage())
+                  MaterialPageRoute(builder: (context) => RegisterPage()),
                 );
-              }, 
-              child: Text('Sign up',
-              style: GoogleFonts.montserrat(
-                color: Colors.white,
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
+              },
+              child: Text(
+                'Sign up',
+                style: GoogleFonts.montserrat(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
           ],
-        )
+        ),
       ],
     );
   }
