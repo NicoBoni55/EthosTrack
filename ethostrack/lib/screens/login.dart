@@ -5,6 +5,7 @@ import '../services/auth_service.dart';
 import '../models/user_model.dart';
 import 'sign_up.dart';
 import 'home_screen.dart';
+import '../screens/habits/habits_list.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -84,7 +85,7 @@ class _LoginInputsState extends State<LoginInputs> {
         if (mounted) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()),
+            MaterialPageRoute(builder: (context) => const HabitsList()),
           );
         }
       } else {
