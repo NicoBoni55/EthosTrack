@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../services/auth_service.dart';
 import '../models/user_model.dart';
+import '../screens/habits/create_habits_screen.dart';
 import 'login.dart';
 import 'home_screen.dart';
 
@@ -103,7 +104,7 @@ class _LoginInputsState extends State<SignUpInputs> {
         if (mounted) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()),
+            MaterialPageRoute(builder: (context) => const CreateHabitsScreen()),
           );
         }
       } else {

@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../services/auth_service.dart';
 import '../models/user_model.dart';
 import 'sign_up.dart';
-import 'home_screen.dart';
+import '../screens/habits/create_habits_screen.dart';
 import '../screens/habits/habits_list.dart';
 
 class LoginPage extends StatefulWidget {
