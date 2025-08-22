@@ -89,6 +89,33 @@ class HabitService {
     }
   }
 
+  static Future<bool> updateHabit ({
+    required String habitId,
+    required String title,
+    required String description,
+  }) async {
+    try {
+      print('✅ Updating habit: $habitId');
+      print('✅ New title: $title');
+      print('✅ New Description: $description');
+
+      await _firestore
+        .collection('habits')
+        .doc(habitId)
+        .update({
+          'title': title,
+          'description': description,
+          'upadateAt': DateTime.now(),
+        });
+
+        print('✅ Habit updated successfully');
+        return true;
+    } catch (e) {
+      print('❌ Error updating habit: $e');
+      return false;
+    }
+  }
+
   // DELETE
   static Future<bool> deleteHabit(String habitId) async {
     try {

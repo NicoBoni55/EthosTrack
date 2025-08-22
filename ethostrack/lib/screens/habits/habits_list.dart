@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../services/habit_service.dart';
+import 'create_habits_screen.dart';
 
 class HabitsList extends StatefulWidget {
   const HabitsList({super.key});
@@ -120,6 +121,7 @@ class _HabitsListState extends State<HabitsList> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF6A0DAD),
+        centerTitle: true,
         title: Text(
           'My Habits',
           style: GoogleFonts.montserrat(
@@ -217,6 +219,7 @@ class _HabitsListState extends State<HabitsList> {
                     HabitModel habit = habits[index];
                     return Card(
                       elevation: 4,
+                      color: Colors.white,
                       margin: const EdgeInsets.symmetric(vertical: 8.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
@@ -238,7 +241,7 @@ class _HabitsListState extends State<HabitsList> {
                                     habit.title,
                                     style: GoogleFonts.montserrat(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 16,
+                                      fontSize: 23,
                                       color: Color(0xFF6A0DAD),
                                     ),
                                   ),
@@ -310,7 +313,7 @@ class _HabitsListState extends State<HabitsList> {
                                   label: Text(
                                     habit.isCompleted
                                         ? 'Completed'
-                                        : 'Mark Complete',
+                                        : 'Complete',
                                     style: GoogleFonts.montserrat(
                                       color: habit.isCompleted
                                           ? Colors.green.shade700
@@ -351,8 +354,18 @@ class _HabitsListState extends State<HabitsList> {
         height: 70,
         width: 70,
         child: FloatingActionButton(
-          onPressed: () {
-            print('Navigate to CreateHabitScreen');
+          onPressed: () async {
+            final result = await Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => CreateHabitsScreen(),
+              ),
+            );
+
+            if (result == true) {
+              print('✅ Habit created');
+              _loadHabits();
+            }
           },
           child: Icon(Icons.add, color: Color(0xFF6A0DAD), size: 40),
           backgroundColor: Colors.white,
