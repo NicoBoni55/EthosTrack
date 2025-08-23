@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../services/habit_service.dart';
+import '../habits/edit_habits_screen.dart';
 import 'create_habits_screen.dart';
 
 class HabitsList extends StatefulWidget {
@@ -302,7 +303,7 @@ class _HabitsListState extends State<HabitsList> {
                               children: [
                                 TextButton.icon(
                                   icon: Icon(
-                                    size: 20,
+                                    size: 18,
                                     habit.isCompleted
                                         ? Icons.check_box
                                         : Icons.check_box_outline_blank,
@@ -325,7 +326,34 @@ class _HabitsListState extends State<HabitsList> {
                                 ),
                                 TextButton.icon(
                                   icon: Icon(
-                                    size: 20,
+                                    size: 18,
+                                    Icons.edit,
+                                    color: Colors.blue.shade700,
+                                  ),
+                                  label: Text(
+                                    'Edit',
+                                    style: GoogleFonts.montserrat(
+                                      color: Colors.blue.shade700,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  onPressed: () async {
+                                    final result = await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            EditHabitsScreen(habit: habit),
+                                      ),
+                                    );
+                                    if (result == true) {
+                                      print('✅ Habit updated, refreshing list');
+                                      _loadHabits();
+                                    }
+                                  },
+                                ),
+                                TextButton.icon(
+                                  icon: Icon(
+                                    size: 18,
                                     Icons.delete,
                                     color: Colors.red,
                                   ),
@@ -333,6 +361,7 @@ class _HabitsListState extends State<HabitsList> {
                                     'Delete',
                                     style: GoogleFonts.montserrat(
                                       color: Colors.red,
+                                      fontSize: 12,
                                     ),
                                   ),
                                   onPressed: () => _deleteHabit(habit),
@@ -356,10 +385,8 @@ class _HabitsListState extends State<HabitsList> {
         child: FloatingActionButton(
           onPressed: () async {
             final result = await Navigator.push(
-              context, 
-              MaterialPageRoute(
-                builder: (context) => CreateHabitsScreen(),
-              ),
+              context,
+              MaterialPageRoute(builder: (context) => CreateHabitsScreen()),
             );
 
             if (result == true) {
