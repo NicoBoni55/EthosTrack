@@ -1,3 +1,4 @@
+import 'package:ethostrack/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -85,7 +86,8 @@ class _LoginInputsState extends State<LoginInputs> {
         if (mounted) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const HabitsList()),
+            MaterialPageRoute(builder: (context) => HomeScreen()
+            ),
           );
         }
       } else {
@@ -238,18 +240,6 @@ class _LoginInputsState extends State<LoginInputs> {
                   color: Colors.white,
                 ),
               ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 20),
-        Align(
-          alignment: Alignment.centerRight,
-          child: Text(
-            'Forgot Password?',
-            style: GoogleFonts.montserrat(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
             ),
           ),
         ),

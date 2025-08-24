@@ -104,7 +104,7 @@ class _LoginInputsState extends State<SignUpInputs> {
         if (mounted) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const CreateHabitsScreen()),
+            MaterialPageRoute(builder: (context) => HomeScreen()),
           );
         }
       } else {
