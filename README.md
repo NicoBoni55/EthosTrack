@@ -26,19 +26,38 @@ Designed for anyone wanting a **practical** and **clear tool**, EthosTrack focus
 - ☑️ **Toggle** completion status
 
 ### 📊 **Progress Tracking**
-- Beautiful circular progress indicator
+- Circular progress indicator
 - Real-time completion percentage
 - Animated progress updates
 
 ### 🎨 **Modern UI/UX**
 - Gradient backgrounds
 - Material Design cards
-- Smooth animations
-- Responsive design
 - Custom Google Fonts (Montserrat)
 
 ## 📱 Screenshots
 
+<div align="center">
+
+
+### 🔒Login
+<img src="./ethostrack/docs/login.png" alt="Login Screen" width="200"/>
+
+### 🔒Register
+<img src="./ethostrack/docs/register.png" alt="Register Screen" width="200"/>
+
+### 🏡 Home Screen with Progress
+<img src="./ethostrack/docs/home.png" alt="Home Screen" width="200"/>
+
+### 📃 Habit Management
+<img src="./ethostrack/docs/habits_list.png" alt="Habits List Screen" width="200"/>
+
+### ➕ Create New Habits
+<img src="./ethostrack/docs/create_habit.png" alt="Create Habits Screen" width="200"/>
+
+### ✏️ Edit Habit
+<img src="./ethostrack/docs/edit_habit.png" alt="Edit Habits Screen" width="200"/>
+</div>
 
 
 ## 🚀 Getting Started
