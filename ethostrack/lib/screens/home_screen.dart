@@ -170,6 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     return Scaffold(
       body: Container(
+        height: MediaQuery.of(context).size.height.round() * 2,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -204,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               _buildProgressCard(),
               Padding(
-                padding: EdgeInsets.all(16),
+                padding: EdgeInsets.all(10),
                 child: Column(
                   children: [
                     Row(
@@ -224,8 +225,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             padding: EdgeInsets.symmetric(
-                              horizontal: 40,
-                              vertical: 15,
+                              horizontal: 36,
+                              vertical: 10,
                             ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -240,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 12),
                         ElevatedButton(
                           onPressed: () {
                             Navigator.push(
@@ -255,8 +256,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             padding: EdgeInsets.symmetric(
-                              horizontal: 40,
-                              vertical: 15,
+                              horizontal: 36,
+                              vertical: 10,
                             ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),

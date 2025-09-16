@@ -38,12 +38,14 @@ class _HabitsListState extends State<HabitsList> {
 
     if (success) {
       _loadHabits();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(newState ? 'Completed' : 'Pending'),
-          backgroundColor: newState ? Colors.green : Colors.orange,
+      if (newState) { 
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Complete'),
+            backgroundColor: Colors.green
         ),
       );
+      }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -62,6 +64,7 @@ class _HabitsListState extends State<HabitsList> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.white,
           title: Text(
             'Delete Habit',
             style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
@@ -82,7 +85,10 @@ class _HabitsListState extends State<HabitsList> {
               onPressed: () => Navigator.of(context).pop(true),
               child: Text(
                 'Delete',
-                style: GoogleFonts.montserrat(color: Colors.red),
+                style: GoogleFonts.montserrat(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold
+                ),
               ),
             ),
           ],
