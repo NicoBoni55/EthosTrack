@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../services/auth_service.dart';
 import '../models/user_model.dart';
 import 'sign_up.dart';
+import '../utils/sizeconfig.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,20 +23,24 @@ class _LoginPageState extends State<LoginPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 100),
-              SvgPicture.asset('assets/images/Logo.svg', width: 70, height: 70),
-              const SizedBox(height: 10),
+              SizedBox(height: Sizeconfig.height(100)),
+              SvgPicture.asset(
+                'assets/images/Logo.svg',
+                width: Sizeconfig.width(70), 
+                height: Sizeconfig.width(70)
+              ),
+              SizedBox(height: Sizeconfig.height(10)),
               Text(
                 'Log in',
                 style: GoogleFonts.montserrat(
                   color: Colors.white,
-                  fontSize: 32,
+                  fontSize: Sizeconfig.textScale(32),
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: Sizeconfig.height(20)),
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: Sizeconfig.padding(all: 20),
                 child: Column(children: [LoginInputs()]),
               ),
             ],
@@ -164,18 +169,22 @@ class _LoginInputsState extends State<LoginInputs> {
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
                 spreadRadius: 0,
-                blurRadius: 8,
-                offset: const Offset(0, 4),
+                blurRadius: Sizeconfig.width(8),
+                offset: Offset(0, Sizeconfig.height(4)),
               ),
             ],
           ),
           child: TextField(
             controller: emailController,
-            style: const TextStyle(color: Colors.white),
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: Sizeconfig.textScale(16),
+            ),
             decoration: InputDecoration(
               labelText: "Email",
               labelStyle: GoogleFonts.montserrat(
                 color: Colors.white,
+                fontSize: Sizeconfig.textScale(16),
                 fontWeight: FontWeight.bold,
               ),
               border: const OutlineInputBorder(
@@ -193,26 +202,30 @@ class _LoginInputsState extends State<LoginInputs> {
             ),
           ),
         ),
-        const SizedBox(height: 30),
+        SizedBox(height: Sizeconfig.height(30)),
         Container(
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
                 spreadRadius: 0,
-                blurRadius: 8,
-                offset: const Offset(0, 4),
+                blurRadius: Sizeconfig.width(8),
+                offset: Offset(0, Sizeconfig.height(4)),
               ),
             ],
           ),
           child: TextField(
             controller: passwordController,
             obscureText: !isPasswordVisible,
-            style: const TextStyle(color: Colors.white),
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: Sizeconfig.textScale(16),
+            ),
             decoration: InputDecoration(
               labelText: "Password",
               labelStyle: GoogleFonts.montserrat(
                 color: Colors.white,
+                fontSize: Sizeconfig.textScale(16),
                 fontWeight: FontWeight.bold,
               ),
               border: const OutlineInputBorder(
@@ -241,48 +254,56 @@ class _LoginInputsState extends State<LoginInputs> {
             ),
           ),
         ),
-        const SizedBox(height: 20),
-        SizedBox(
-          height: 50,
-          width: 300,
+        SizedBox(height: Sizeconfig.height(20)),
+        Container(
+          height: Sizeconfig.height(50),
+          width: Sizeconfig.width(300),
           child: FloatingActionButton(
             onPressed: isLoading ? null : _handleLogin,
             backgroundColor: isLoading ? Colors.grey : Colors.white,
             child: isLoading
-                ? const CircularProgressIndicator(
+                ? CircularProgressIndicator(
                     color: Colors.grey,
-                    strokeWidth: 2,
+                    strokeWidth: Sizeconfig.width(2),
                   )
                 : Text(
                     "Login",
                     style: GoogleFonts.montserrat(
                       color: Color(0xFF0CC0DF),
-                      fontSize: 20,
+                      fontSize: Sizeconfig.textScale(20),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
           ),
         ),
-        const SizedBox(height: 30),
+        SizedBox(height: Sizeconfig.height(30)),
         Row(
           children: [
             Flexible(
-              child: Divider(thickness: 2, indent: 40, color: Colors.white),
+              child: Divider(
+                thickness: Sizeconfig.height(2), 
+                indent: Sizeconfig.width(40), 
+                color: Colors.white
+              ),
             ),
             Text(
               "   or   ",
               style: GoogleFonts.montserrat(
-                fontSize: 18,
+                fontSize: Sizeconfig.textScale(18),
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Flexible(
-              child: Divider(thickness: 2, endIndent: 40, color: Colors.white),
+              child: Divider(
+                thickness: Sizeconfig.height(2), 
+                endIndent: Sizeconfig.width(40), 
+                color: Colors.white
+              ),
             ),
           ],
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: Sizeconfig.height(20)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -290,7 +311,7 @@ class _LoginInputsState extends State<LoginInputs> {
               'Don\'t have an account?',
               style: GoogleFonts.montserrat(
                 color: Colors.white,
-                fontSize: 15,
+                fontSize: Sizeconfig.textScale(15),
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -305,7 +326,7 @@ class _LoginInputsState extends State<LoginInputs> {
                 'Sign up',
                 style: GoogleFonts.montserrat(
                   color: Colors.white,
-                  fontSize: 15,
+                  fontSize: Sizeconfig.textScale(15),
                   fontWeight: FontWeight.bold,
                 ),
               ),
