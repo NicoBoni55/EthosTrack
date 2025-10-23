@@ -113,7 +113,7 @@ class _CreateHabitsScreenState extends State<CreateHabitsScreen> {
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(24.0),
+                          padding: const EdgeInsets.all(20),
                           child: Row(
                             children: [
                               Icon(
@@ -121,7 +121,7 @@ class _CreateHabitsScreenState extends State<CreateHabitsScreen> {
                                 size: 40,
                                 color: Colors.white,
                               ),
-                              const SizedBox(width: 22),
+                              const SizedBox(width: 18),
                               Text(
                                 'Add a New Habit',
                                 textAlign: TextAlign.center,

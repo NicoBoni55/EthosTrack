@@ -1,3 +1,4 @@
+import 'package:ethostrack/utils/sizeconfig.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,6 +6,7 @@ import '../services/auth_service.dart';
 import '../models/user_model.dart';
 import 'login.dart';
 import 'home_screen.dart';
+import '../utils/sizeconfig.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -22,20 +24,24 @@ class _RegisterPageState extends State<RegisterPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 100),
-              SvgPicture.asset('assets/images/Logo.svg', width: 70, height: 70),
-              const SizedBox(height: 10),
+              SizedBox(height: Sizeconfig.height(60)),
+              SvgPicture.asset(
+                'assets/images/Logo.svg', 
+                width: Sizeconfig.width(70), 
+                height: Sizeconfig.width(70)
+              ),
+              SizedBox(height: Sizeconfig.height(10)),
               Text(
                 'Sign up',
                 style: GoogleFonts.montserrat(
                   color: Colors.white,
-                  fontSize: 32,
+                  fontSize: Sizeconfig.textScale(32),
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: Sizeconfig.height(20)),
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: Sizeconfig.padding(all: 20),
                 child: Column(children: [SignUpInputs()]),
               ),
             ],
@@ -115,7 +121,6 @@ class _LoginInputsState extends State<SignUpInputs> {
       print('ERROR COMPLETO: $e');
       print('TIPO DE ERROR: ${e.runtimeType}');
 
-
       if (e.toString().contains('email-already-in-use')) {
         errorMessage = 'This email is already registered.';
       } else if (e.toString().contains('weak-password')) {
@@ -184,8 +189,8 @@ class _LoginInputsState extends State<SignUpInputs> {
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
                 spreadRadius: 0,
-                blurRadius: 8,
-                offset: const Offset(0, 4),
+                blurRadius: Sizeconfig.width(8),
+                offset: Offset(0, Sizeconfig.height(4)),
               ),
             ],
           ),
@@ -196,6 +201,7 @@ class _LoginInputsState extends State<SignUpInputs> {
               labelText: "Email",
               labelStyle: GoogleFonts.montserrat(
                 color: Colors.white,
+                fontSize: Sizeconfig.textScale(16),
                 fontWeight: FontWeight.bold,
               ),
               border: const OutlineInputBorder(
@@ -213,15 +219,15 @@ class _LoginInputsState extends State<SignUpInputs> {
             ),
           ),
         ),
-        const SizedBox(height: 30),
+        SizedBox(height: Sizeconfig.height(30)),
         Container(
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
                 spreadRadius: 0,
-                blurRadius: 8,
-                offset: const Offset(0, 4),
+                blurRadius: Sizeconfig.width(8),
+                offset: Offset(0, Sizeconfig.height(4)),
               ),
             ],
           ),
@@ -232,6 +238,7 @@ class _LoginInputsState extends State<SignUpInputs> {
               labelText: "Username",
               labelStyle: GoogleFonts.montserrat(
                 color: Colors.white,
+                fontSize: Sizeconfig.textScale(16),
                 fontWeight: FontWeight.bold,
               ),
               border: const OutlineInputBorder(
@@ -249,15 +256,15 @@ class _LoginInputsState extends State<SignUpInputs> {
             ),
           ),
         ),
-        const SizedBox(height: 30),
+        SizedBox(height: Sizeconfig.height(30)),
         Container(
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
                 spreadRadius: 0,
-                blurRadius: 8,
-                offset: const Offset(0, 4),
+                blurRadius: Sizeconfig.width(8),
+                offset: Offset(0, Sizeconfig.height(4)),
               ),
             ],
           ),
@@ -269,6 +276,7 @@ class _LoginInputsState extends State<SignUpInputs> {
               labelText: "Password",
               labelStyle: GoogleFonts.montserrat(
                 color: Colors.white,
+                fontSize: Sizeconfig.textScale(16),
                 fontWeight: FontWeight.bold,
               ),
               border: const OutlineInputBorder(
@@ -297,15 +305,15 @@ class _LoginInputsState extends State<SignUpInputs> {
             ),
           ),
         ),
-        const SizedBox(height: 30),
+        SizedBox(height: Sizeconfig.textScale(30)),
         Container(
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
                 spreadRadius: 0,
-                blurRadius: 8,
-                offset: const Offset(0, 4),
+                blurRadius: Sizeconfig.width(8),
+                offset: Offset(0, Sizeconfig.height(4)),
               ),
             ],
           ),
@@ -317,6 +325,7 @@ class _LoginInputsState extends State<SignUpInputs> {
               labelText: "Confirm Password",
               labelStyle: GoogleFonts.montserrat(
                 color: Colors.white,
+                fontSize: Sizeconfig.textScale(16),
                 fontWeight: FontWeight.bold,
               ),
               border: const OutlineInputBorder(
@@ -345,10 +354,10 @@ class _LoginInputsState extends State<SignUpInputs> {
             ),
           ),
         ),
-        const SizedBox(height: 30),
+        SizedBox(height: Sizeconfig.textScale(30)),
         SizedBox(
-          height: 50,
-          width: 300,
+          height: Sizeconfig.height(50),
+          width: Sizeconfig.width(300),
           child: FloatingActionButton(
             onPressed: isLoading ? null : _handleSignUp,
             backgroundColor: isLoading ? Colors.grey : Colors.white,
@@ -361,32 +370,40 @@ class _LoginInputsState extends State<SignUpInputs> {
                     "Sign up",
                     style: GoogleFonts.montserrat(
                       color: Color(0xFF0CC0DF),
-                      fontSize: 20,
+                      fontSize:  Sizeconfig.textScale(20),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
           ),
         ),
-        const SizedBox(height: 30),
-        Row(
+        SizedBox(height: Sizeconfig.height(30)),
+         Row(
           children: [
             Flexible(
-              child: Divider(thickness: 2, indent: 40, color: Colors.white),
+              child: Divider(
+                thickness: Sizeconfig.height(2), 
+                indent: Sizeconfig.width(40), 
+                color: Colors.white
+              ),
             ),
             Text(
               "   or   ",
               style: GoogleFonts.montserrat(
-                fontSize: 18,
+                fontSize: Sizeconfig.textScale(18),
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Flexible(
-              child: Divider(thickness: 2, endIndent: 40, color: Colors.white),
+              child: Divider(
+                thickness: Sizeconfig.height(2), 
+                endIndent: Sizeconfig.width(40), 
+                color: Colors.white
+              ),
             ),
           ],
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: Sizeconfig.height(20)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -394,7 +411,7 @@ class _LoginInputsState extends State<SignUpInputs> {
               'Have an account?',
               style: GoogleFonts.montserrat(
                 color: Colors.white,
-                fontSize: 15,
+                fontSize: Sizeconfig.textScale(15),
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -409,7 +426,7 @@ class _LoginInputsState extends State<SignUpInputs> {
                 'Log in',
                 style: GoogleFonts.montserrat(
                   color: Colors.white,
-                  fontSize: 15,
+                  fontSize: Sizeconfig.textScale(15),
                   fontWeight: FontWeight.bold,
                 ),
               ),

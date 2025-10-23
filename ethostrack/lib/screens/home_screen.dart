@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../services/auth_service.dart';
 import '../models/user_model.dart';
 import 'login.dart';
+import '../utils/sizeconfig.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -90,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
         completionPercentage = completionPercentage.clamp(0.0, 1.0);
 
         return Padding(
-          padding: EdgeInsets.all(16),
+          padding: Sizeconfig.padding(all: 16),
           child: Card(
             elevation: 8,
             shape: RoundedRectangleBorder(
@@ -107,20 +108,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Padding(
-                padding: EdgeInsets.all(24),
+                padding: Sizeconfig.padding(all: 24),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       'Welcome ${currentUser?.username ?? 'User'}!',
                       style: GoogleFonts.montserrat(
-                        fontSize: 24,
+                        fontSize: Sizeconfig.textScale(24),
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF1E3A8A),
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: Sizeconfig.height(24)),
 
                     CircularPercentIndicator(
                       radius: 90.0,
@@ -131,17 +132,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         '${(completionPercentage * 100).toInt()}%',
                         style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.bold,
-                          fontSize: 32,
+                          fontSize: Sizeconfig.textScale(32),
                           color: Color(0xFF1E3A8A),
                         ),
                       ),
                       footer: Padding(
-                        padding: EdgeInsets.only(top: 16),
+                        padding: Sizeconfig.padding(top: 16),
                         child: Text(
                           'Habits Today',
                           style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.bold,
-                            fontSize: 24,
+                            fontSize: Sizeconfig.textScale(24),
                             color: Color(0xFF1E3A8A),
                           ),
                         ),
@@ -183,20 +184,20 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 16),
+                padding: Sizeconfig.symmetric(vertical: 16),
                 child: Column(
                   children: [
                     SvgPicture.asset(
                       'assets/images/Logo.svg',
-                      width: 70,
-                      height: 70,
+                      width: Sizeconfig.width(60),
+                      height: Sizeconfig.width(60),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: Sizeconfig.height(8)),
                     Text(
                       'EthosTrack',
                       style: GoogleFonts.montserrat(
                         color: Colors.white,
-                        fontSize: 24,
+                        fontSize: Sizeconfig.textScale(24),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -205,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               _buildProgressCard(),
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: Sizeconfig.padding(all: 8),
                 child: Column(
                   children: [
                     Row(
@@ -224,8 +225,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 36,
+                            padding: Sizeconfig.symmetric(
+                              horizontal: 30,
                               vertical: 10,
                             ),
                             shape: RoundedRectangleBorder(
@@ -236,12 +237,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             'Habit list',
                             style: GoogleFonts.montserrat(
                               color: Color(0xFF1E3A8A),
-                              fontSize: 18,
+                              fontSize: Sizeconfig.textScale(18),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        SizedBox(width: Sizeconfig.width(12)),
                         ElevatedButton(
                           onPressed: () {
                             Navigator.push(
@@ -255,8 +256,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 36,
+                            padding: Sizeconfig.symmetric(
+                              horizontal: 30,
                               vertical: 10,
                             ),
                             shape: RoundedRectangleBorder(
@@ -267,20 +268,20 @@ class _HomeScreenState extends State<HomeScreen> {
                             'Add Habit',
                             style: GoogleFonts.montserrat(
                               color: Color(0xFF1E3A8A),
-                              fontSize: 18,
+                              fontSize: Sizeconfig.textScale(18),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: Sizeconfig.height(16)),
                     ElevatedButton(
                       onPressed: _signOut,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 40,
+                        padding: Sizeconfig.symmetric(
+                          horizontal: 30,
                           vertical: 15,
                         ),
                         shape: RoundedRectangleBorder(
@@ -291,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         'Logout',
                         style: GoogleFonts.montserrat(
                           color: Color(0xFF1E3A8A),
-                          fontSize: 18,
+                          fontSize: Sizeconfig.textScale(18),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
